@@ -1,7 +1,7 @@
 services:
   list-n-run-server:
     build:
-      context: ../../Desktop
+      context: .
       target: build_dev
       dockerfile: Dockerfile-dev
     env_file:

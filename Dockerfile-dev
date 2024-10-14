@@ -22,7 +22,7 @@ COPY Gemfile.lock .
 
 RUN bundle install
 
-COPY ../../Desktop .
+COPY . .
 
 # Entrypoint prepares the database.
 ENTRYPOINT ["/rails/bin/docker-entrypoint"]

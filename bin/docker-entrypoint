@@ -5,11 +5,17 @@ if [ -z "${LD_PRELOAD+x}" ] && [ -f /usr/lib/*/libjemalloc.so.2 ]; then
   export LD_PRELOAD="$(echo /usr/lib/*/libjemalloc.so.2)"
 fi
 
-<% unless skip_active_record? -%>
-# If running the rails server then create or migrate existing database
-if [ "${1}" == "./bin/rails" ] && [ "${2}" == "server" ]; then
-  ./bin/rails db:prepare
-fi
+echo "Waiting for PostgreSQL at $POSTGRES_HOST:$POSTGRES_PORT"
 
-<% end -%>
+# Loop until PostgreSQL is available
+while ! nc -z $POSTGRES_HOST $POSTGRES_PORT; do
+  echo "PostgreSQL is unavailable - waiting..."
+  sleep 1
+done
+
+# If running the rails server then create or migrate existing database
+echo "Preparing database"
+./bin/rails db:prepare
+
+echo "Starting server"
 exec "${@}"
