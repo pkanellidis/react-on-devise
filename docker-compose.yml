@@ -1,0 +1,25 @@
+services:
+  list-n-run-server:
+    build:
+      context: ../../Desktop
+      target: build_dev
+      dockerfile: Dockerfile-dev
+    env_file:
+      - .env
+    ports:
+      - 3000:3000
+    depends_on:
+      - postgres-development
+    volumes:
+      - app-data:/app
+  postgres-development:
+    image: postgres:17
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+    ports:
+      - 5432:5432
+volumes:
+  app-data:
+  postgres-data:
