@@ -53,7 +53,11 @@ gem "phonelib", "~> 0.9.2"
 
 # Authentication
 gem "devise"
-gem "jwt"
+
+# React mounting
+gem "shakapacker", "7.0.2"
+gem "react_on_rails", "14.0.5"
+
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
@@ -65,7 +69,7 @@ end
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
-
+  gem "package_json"
   # Read sent emails
   gem "letter_opener", "~> 1.4.1"
 
