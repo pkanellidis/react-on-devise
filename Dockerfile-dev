@@ -17,11 +17,12 @@ RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
     echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list && \
     apt-get update && \
     apt-get install -y yarn
+RUN rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
 # Verify Node.js and Yarn installation
 RUN node -v && yarn -v
 
-RUN rm -rf /var/lib/apt/lists /var/cache/apt/archives
+RUN gem install overmind
 
 COPY package-lock.json .
 COPY package.json .
@@ -41,4 +42,6 @@ ENTRYPOINT ["/rails/bin/docker-entrypoint"]
 
 # Start the server by default, this can be overwritten at runtime
 EXPOSE 3000
-CMD ["bundle", "exec", "rails", "server", "-b", "0.0.0.0", "-p", "3000"]
+EXPOSE 3035
+
+CMD ["overmind", "start", "-f", "Procfile.dev"]
