@@ -13,6 +13,7 @@ services:
       - postgres-development
     volumes:
       - .:/app
+      - /app/node_modules
   postgres-development:
     image: postgres:17
     environment:
@@ -23,3 +24,4 @@ services:
       - 5432:5432
 volumes:
   postgres-data:
+  node_modules:

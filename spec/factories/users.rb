@@ -13,7 +13,8 @@ FactoryBot.define do
     trait :admin do
       admin { true }
       email { "admin@test.com" }
-      password { "12345" }
+      password { "123456" }
+      confirmed_at { Time.current }
     end
   end
 end

@@ -5,6 +5,6 @@ class HomeController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @hello_world_props = { name: "Stranger", logout_path: destroy_user_session_path }
+    @home_props = { name: "Panais", logout_path: destroy_user_session_path }
   end
 end
