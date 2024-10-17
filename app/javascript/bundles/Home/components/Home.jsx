@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
-import * as style from './Home.module.css';
+import TopMenu from "./Menu/TopMenu";
 
 const Home = (props, railsContext) => {
   return () => {
@@ -8,16 +8,19 @@ const Home = (props, railsContext) => {
       console.log(railsContext)
 
       return (
-          <div>
-              <h3>Hello, {name}!</h3>
-              <hr />
-              <form>
-                  <label className={style.bright} htmlFor="name">
-                      Say hello to:
-                      <input id="name" type="text" value={name} onChange={(e) => setName(e.target.value)} />
-                  </label>
-              </form>
-          </div>
+          <>
+              <TopMenu/>
+              <div>
+                  <h3>Hello, {name}!</h3>
+                  <hr />
+                  <form>
+                      <label htmlFor="name">
+                          Say hello to:
+                          <input id="name" type="text" value={name} onChange={(e) => setName(e.target.value)} />
+                      </label>
+                  </form>
+              </div>
+          </>
       );
   }
 };

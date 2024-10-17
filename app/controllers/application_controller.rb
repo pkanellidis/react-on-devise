@@ -1,7 +1,11 @@
 class ApplicationController < ActionController::Base
-  def authenticate_user!
-    super if user_signed_in?
+  include ApplicationLayoutHelper
 
-    redirect_to new_user_session_path
+  layout :authentication_or_application_layout
+
+  private
+
+  def authenticate_user!
+    redirect_to new_user_session_url unless user_signed_in?
   end
 end
