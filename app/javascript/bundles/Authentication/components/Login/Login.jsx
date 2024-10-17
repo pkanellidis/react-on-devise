@@ -3,7 +3,7 @@ import {Form, Input, Button, Checkbox} from 'antd';
 import {MailOutlined, LockOutlined} from '@ant-design/icons';
 import ErrorMessage from "../../../Shared/components/Error/ErrorMessage";
 
-const Login = ({login_path, csrf_token}) => {
+const Login = ({paths, csrf_token}) => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
@@ -12,10 +12,11 @@ const Login = ({login_path, csrf_token}) => {
         setLoading(true);
 
         // Simulate login request
-        await fetch(login_path, {
+        await fetch(paths.login_path, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                'Accept': 'application/json',
                 'X-CSRF-Token': csrf_token, // Include Rails CSRF token
             },
             body: JSON.stringify({user: {email: values.email, password: values.password, remember_me: values.remember}})
@@ -25,9 +26,12 @@ const Login = ({login_path, csrf_token}) => {
                     window.location = response.url;
                 }
             } else {
-                setError("Invalid credentials, please try again")
-                setLoading(false)
+                return response.json()
             }
+        }).then((data) => {
+            console.log(data)
+            setLoading(false)
+            setError(data.error)
         }).catch((error) => {
             setError(error || "Network error, please try again")
         })
@@ -76,7 +80,7 @@ const Login = ({login_path, csrf_token}) => {
                 <Form.Item name="remember" valuePropName="checked" noStyle>
                     <Checkbox>Remember me</Checkbox>
                 </Form.Item>
-                <a className="login-form-forgot" href="#" style={{float: 'right'}}>
+                <a className="login-form-forgot" href={paths.forgot_password_path} style={{float: 'right'}}>
                     Forgot password?
                 </a>
             </Form.Item>
@@ -91,7 +95,7 @@ const Login = ({login_path, csrf_token}) => {
                 >
                     Log in
                 </Button>
-                Or <a href="#">register now!</a>
+                Or <a href={paths.register_path}>register now!</a>
             </Form.Item>
 
             { error ? <ErrorMessage message={error}/> : null }
