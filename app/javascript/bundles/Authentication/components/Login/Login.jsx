@@ -3,16 +3,17 @@ import {Form, Input, Button, Checkbox} from 'antd';
 import {MailOutlined, LockOutlined} from '@ant-design/icons';
 import ErrorMessage from "../../../Shared/components/Error/ErrorMessage";
 
-const Login = ({paths, csrf_token}) => {
+const Login = ({loginPath, navigationPaths, csrf_token}) => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
     // Handle form submission
     const onFinish = async (values) => {
         setLoading(true);
+        setError(null)
 
         // Simulate login request
-        await fetch(paths.login_path, {
+        await fetch(loginPath, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -80,7 +81,7 @@ const Login = ({paths, csrf_token}) => {
                 <Form.Item name="remember" valuePropName="checked" noStyle>
                     <Checkbox>Remember me</Checkbox>
                 </Form.Item>
-                <a className="login-form-forgot" href={paths.forgot_password_path} style={{float: 'right'}}>
+                <a className="login-form-forgot" href={navigationPaths.forgot_password_path} style={{float: 'right'}}>
                     Forgot password?
                 </a>
             </Form.Item>
@@ -95,10 +96,10 @@ const Login = ({paths, csrf_token}) => {
                 >
                     Log in
                 </Button>
-                Or <a href={paths.register_path}>register now!</a>
+                Or <a href={navigationPaths.sign_up_path}>register now!</a>
             </Form.Item>
 
-            { error ? <ErrorMessage message={error}/> : null }
+            {error ? <ErrorMessage message={error}/> : null}
         </Form>
     );
 };
