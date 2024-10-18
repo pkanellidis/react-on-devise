@@ -1,0 +1,7 @@
+node_modules
+
+# Ignore the tmp folder
+tmp
+
+# You can add more files or directories that should be excluded from the container
+.git
