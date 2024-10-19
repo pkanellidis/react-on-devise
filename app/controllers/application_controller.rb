@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   include ApplicationLayoutHelper
+  include JsonRespondable
 
   layout :authentication_or_application_layout
 

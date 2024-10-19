@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module JsonResponseHelper
+module JsonRespondable
 
   def json(data:, message: , errors: nil, status: )
     render json: {

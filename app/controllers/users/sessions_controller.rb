@@ -1,8 +1,7 @@
 # frozen_string_literal: true
 
 class Users::SessionsController < Devise::SessionsController
-  include JsonResponseHelper
-  
+
   # POST /resource/sign_in
   def create
     self.resource = warden.authenticate!(auth_options)
