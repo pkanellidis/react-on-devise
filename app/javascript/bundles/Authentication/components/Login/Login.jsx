@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { Form, Input, Button, Checkbox, Card, Typography } from 'antd';
 import { MailOutlined, LockOutlined } from '@ant-design/icons';
+import axios from 'axios';
 import ErrorMessage from "../../../Shared/components/Error/ErrorMessage";
 import NavigationLinks from "../NavigationLinks/NavigationLinks";
+import {readResponseErrors} from "../../../utils/Api/api";
 
 const { Title } = Typography;
 
@@ -15,26 +17,29 @@ const Login = ({ loginPath, navigationPaths, csrf_token }) => {
         setError(null);
 
         try {
-            const response = await fetch(loginPath, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json',
-                    'X-CSRF-Token': csrf_token,
+            const response = await axios.post(
+                loginPath,
+                {
+                    user: {
+                        email: values.email,
+                        password: values.password,
+                        remember_me: values.remember,
+                    },
                 },
-                body: JSON.stringify({
-                    user: { email: values.email, password: values.password, remember_me: values.remember }
-                }),
-            });
+                {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                        'X-CSRF-Token': csrf_token,
+                    },
+                }
+            );
 
-            if (response.status === 200 && response.redirected) {
-                window.location = response.url;
-            } else {
-                const data = await response.json();
-                setError(data.error);
+            if (response.status === 200 && response.request.responseURL) {
+                window.location.href = response.request.responseURL;
             }
         } catch (error) {
-            setError(error.message || "Network error, please try again");
+            setError(readResponseErrors(error))
         } finally {
             setLoading(false);
         }
