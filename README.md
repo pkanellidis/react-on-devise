@@ -10,7 +10,16 @@ to support React-On-Rails with Ant Design Components.
 - Install Docker on your machine
 - Run `docker compose up --build` on the project's root dir
 
+## Seeding data
+
+Start the app using docker and run `docker compose exec rails-web-server bundle exec rake seed:dev`
+
 # Remaining work
 
 - Add tests. No tests were added as this was initially a project to see if this endeavor was reasonable.
-- Verify 
+- Standardize the dependency versions to avoid breaking changes
+
+# Future work
+
+- Implement Oath provider using doorkeeper
+- Create new api controllers to handle the creation of access tokens
