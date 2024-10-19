@@ -11,10 +11,11 @@ module JsonResponseHelper
   end
 
   def json_error(data: nil, errors:, status:)
+    errors = errors.is_a?(Array) ? errors : [errors]
     json(data: data, errors: errors, status: status, message: nil)
   end
 
-  def json_success(data: nil, message: nil, status: :success)
+  def json_success(data: nil, message: nil, status: :ok)
     json(data: data, message: message, status: status)
   end
 

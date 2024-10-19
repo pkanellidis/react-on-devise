@@ -4,7 +4,6 @@ import ErrorMessage from "./ErrorMessage";
 
 const FormErrors = ({ messages }) => {
     if (!messages) return null; // Don't render anything if no message is provided
-
     return (
         <>
             {
