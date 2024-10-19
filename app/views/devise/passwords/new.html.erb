@@ -1,0 +1,5 @@
+<%= react_component("ForgotPassword", props: {
+  csrfToken: form_authenticity_token,
+  navigationPaths: navigation_paths_for_scope,
+  passwordResetPath: password_path(resource_name)
+}) %>

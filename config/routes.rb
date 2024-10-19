@@ -3,6 +3,7 @@ Rails.application.routes.draw do
     registrations: 'users/registrations',
     confirmations: 'users/confirmations',
     sessions: 'users/sessions',
+    passwords: 'users/passwords'
   }
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
