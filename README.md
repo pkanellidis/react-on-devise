@@ -18,6 +18,7 @@ Start the app using docker and run `docker compose exec rails-web-server bundle 
 
 - Add tests. No tests were added as this was initially a project to see if this endeavor was reasonable.
 - Standardize the dependency versions to avoid breaking changes
+- Add CI pipeline
 
 # Future work
 
