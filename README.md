@@ -1,24 +1,16 @@
-# README
+# Description
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This repo provides a basic copy of Devise + Docker + React on Rails setup.
 
-Things you may want to cover:
+The base Devise controllers have been extended to support JSON responses and the views have been modified
+to support React-On-Rails with Ant Design Components.
 
-* Ruby version
+# How to run
 
-* System dependencies
+- Install Docker on your machine
+- Run `docker compose up --build` on the project's root dir
 
-* Configuration
+# Remaining work
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+- Add tests. No tests were added as this was initially a project to see if this endeavor was reasonable.
+- Verify 

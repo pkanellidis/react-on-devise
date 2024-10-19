@@ -1,5 +1,5 @@
 services:
-  list-n-run-server:
+  rails-web-server:
     build:
       context: .
       target: build_dev
